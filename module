@@ -1,3 +1,7 @@
+# update: tested basic
+# remove: tested basic
+# add: tested basic, with space in path (ok), path as '.' (will fail)
+
 # exit when any single command failed
 set -e
 
@@ -6,7 +10,7 @@ set -e
 command=""
 directory=""
 url=""
-help="supported commands: update, remove, add\n sh module (update by default)\n sh module update \n sh module remove path_to_module\n sh module add url_to_repo path_to_module"
+help="supported commands: update, remove, add\n sh module (update by default)\n sh module update \n sh module remove path_to_module\n sh module add url_to_repo path_to_module\n"
 
 
 if [[ -z $1 ]]
@@ -85,7 +89,13 @@ then
 elif [[ $command == "add" ]]
 then
  echo "processing add $url to $directory" 
- git submodule add "$url" "$directory"
+
+ if [[ -n $directory ]]
+ then
+  git submodule add "$url" "$directory"
+ else
+  git submodule add "$url"
+ fi
 
  echo "successfully added"
 
