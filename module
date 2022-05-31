@@ -33,8 +33,6 @@ fi
 
 
 # process
-# test update ??
-# test remove ??
 
 if [[ $command == "update" ]]
 then
