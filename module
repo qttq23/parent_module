@@ -6,7 +6,7 @@ set -e
 command=""
 directory=""
 url=""
-help="supported commands: update, remove, add\n sh module (update by default)\n sh module update \n sh module remove path_to_module\n sh module add url_to_repo path_to_module"
+help="supported commands: update, remove, add\n sh module (update by default)\n sh module update \n sh module remove path_to_module\n sh module add url_to_repo path_to_module\n"
 
 
 if [[ -z $1 ]]
