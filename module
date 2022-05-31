@@ -5,6 +5,8 @@ set -e
 
 command=""
 directory=""
+help="supported commands: update, remove\n sh module (update by default)\n sh module update \n sh module remove path_to_module\n"
+
 
 if [[ -z $1 ]]
 then
@@ -28,6 +30,7 @@ then
 
 else
  echo "invalid first argument. exit 1"
+ printf "$help"
  exit 1
 fi
 
