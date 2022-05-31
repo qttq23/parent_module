@@ -1,2 +1,55 @@
+# exit when any single command failed
+set -e
 
-git submodule sync --recursive & git submodule update --init --recursive
+# parse arguments
+
+command=""
+directory=""
+
+if [[ -z $1 ]]
+then
+ command=update
+
+elif [[ $1 == "update" ]]
+then
+ command=update
+
+elif [[ $1 == "remove" ]]
+then
+ command=remove
+ 
+ if [[ -n $2 ]] && [[ -d $2 ]]
+ then directory="$2"
+
+ else
+  echo "invalid second argument. maybe empty or wrong path. exit 1"
+  exit 1
+ fi
+
+else
+ echo "invalid first argument. exit 1"
+ exit 1
+fi
+
+
+# process
+# test update ??
+# test remove ??
+
+if [[ $command == "update" ]]
+then
+ echo "processing update"
+ git submodule sync --recursive
+ git submodule update --init --recursive
+
+elif [[ $command == "remove" ]]
+then
+ echo "processing remove $directory"
+ git submodule deinit --force "$directory"
+ git rm --force "$directory"
+ rm -rf ".git/modules/$directory"
+
+else
+ echo "something wrong. exit 1"
+ exit 1
+fi
